@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Artículos Guardados</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></link>
+    <style media="screen">
+      .card-title {
+        font-size: 40px;
+        color: white;
+        background-color: blue;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/index.html">Titulares</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/guardado.html">Artículos Guardados</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/scrape">Scrape - Rascar</a>
+      </li>
+    </ul>
+
+<!-- Jumbotron  -->
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Las Noticias de El País</h1>
+      <p class="lead">Titulares actualizados, arrancadas del diario famoso de España. <br> The latest headlines, scraped from Spain's famous daily paper.</p>
+    </div>
+  </div>
+
+<!-- Articles -->
+    <div id="resultados"></div>
+    <script src="guardados.js"></script>
+  </body>
+</html>
