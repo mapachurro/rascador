@@ -1,5 +1,4 @@
-/* Note Taker (18.2.6)
- * front-end
+/* Article Loading Functionality
  * ==================== */
 
 // Loads results onto the page
@@ -11,13 +10,39 @@ function getResults() {
     // For each note...
     for (var i = 0; i < data.length; i++) {
       // ...populate #results with a p-tag that includes the note's title and object id
-      $("#results").prepend("<div class='col'><div class='card'><div class='card-body'><span class='dataTitle' data-id=" +
-        data[i]._id + ">" + "<h2 class='card-title'>" + data[i].title + "</h2>" +"<br>" +"<a class='URL' href=" + data[i].link + "> Fuente: " + data[i].link + "</a></p>" + "<div id='save-button'><button id='save'>Guardar Artículo</button></div><br><h4>Comentarios</h4><div id='user-input'><textarea id='note'></textarea><div id='buttons'><div id='action-button'><button id='make-new'>Guardar Comentario</button></div><button id='clear-all'>Borrar todas las Notas</button></div></div></div></div></div><br>")
+      $("#results").prepend("<div class='col'><div class='card'><div class='card-body'><span id='data-id' data-id=" +
+        data[i]._id + ">" + "<h2 class='card-title'>" + data[i].title + "</h2>" +"<br>" +"<a class='URL' id='URL' href=" + data[i].link + "> Fuente: " + 
+        data[i].link + "</a>" + "<br><h4>Comentarios</h4><div " + "id=resultados" + "><p></p></div><div id='user-input'><textarea id='note'></textarea><div id='buttons'><div id='action-button'><button id='make-new'>Guardar Comentario</button></div><button id='clear-all'>Borrar todas las Notas</button></div></div></div></div></div><br>")
   };
-})};
+})
+getResultados();
+};
 
 // Runs the getResults function as soon as the script is executed
 getResults();
+
+
+/* Note Taker (18.2.6)
+ * front-end
+ * ==================== */
+
+// Loads results onto the page
+function getResultados() {
+  // Empty any results currently on the page
+  $("#resultados").empty();
+  // Grab all of the current notes
+  $.getJSON("/allNotes", function(data) {
+    console.log(data)
+    // For each note...
+    for (var i = 0; i < data.length; i++) {
+      console.log(data[i].note)
+      // if (data[i].article === $("")) {
+        // parent.insertBefore(el, parent.firstChild);
+        resultados.innerHTML = "<p class='data-entry' data-id=" + data[i]._id + ">" + data[i].note + "</span><span class='delete'>  _X_</span></p>"
+      $("#resultados").prepend("<p class='data-entry' data-id=" + data[i]._id + ">" + data[i].note + "</span><span class='delete'>  _X_</span></p>")
+    // }
+    };
+})};
 
 // When the #make-new button is clicked
 $(document).on("click", "#make-new", function() {
@@ -28,19 +53,19 @@ $(document).on("click", "#make-new", function() {
     dataType: "json",
     url: "/submit",
     data: {
-      title: $("#title").val(),
+      article: $("#data-id").val(),
       note: $("#note").val(),
       created: Date.now()
     }
   })
+
   // If that API call succeeds, add the title and a delete button for the note to the page
     .then(function(data) {
-    // Add the title and delete button to the #results section
-      $("#results").prepend("<p class='data-entry' data-id=" + data._id + "><span class='dataTitle' data-id=" +
-      data._id + ">" + data.title + "</span><span class='delete'>X</span></p>");
+      console.log(data);
+    // Add the title and delete button to the #resultados section
+      $("#resultados").prepend("<p class='data-entry' data-id=" + data._id + ">" + data.note + "</span><span class='delete'>  _X_</span></p>");
       // Clear the note and title inputs on the page
       $("#note").val("");
-      $("#title").val("");
     });
 });
 
@@ -53,7 +78,7 @@ $("#clear-all").on("click", function() {
     url: "/clearall",
     // On a successful call, clear the #results section
     success: function(response) {
-      $("#results").empty();
+      $("#resultados").empty();
     }
   });
 });
@@ -126,7 +151,7 @@ $(document).on("click", "#updater", function() {
       // Revert action button to submit
       $("#action-button").html("<button id='make-new'>Submit</button>");
       // Grab the results from the db again, to populate the DOM
-      getResults();
+      getResultados();
     }
   });
 });

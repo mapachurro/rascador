@@ -35,27 +35,6 @@ app.get("/", function(req, res) {
   res.render("index.html")
 });
 
-// Main route (simple Hello World Message)
-app.get("/guardado", function(req, res) {
-  res.render("guardado.html")
-});
-
-// Retrieve data from the db
-app.get("/guardadoDB", function(req, res) {
-  // Find all results from the scrapedData collection in the db
-  db.local.find({}, function(error, found) {
-    // Throw any errors to the console
-    if (error) {
-      console.log(error);
-    }
-    // If there are no errors, send the data to the browser as json
-    else {
-      res.json(found);
-    }
-  });
-});
-
-
 // Retrieve data from the db
 app.get("/all", function(req, res) {
   // Find all results from the scrapedData collection in the db
@@ -110,9 +89,9 @@ app.get("/scrape", function(req, res) {
 });
 
 
-var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80 || 5000;
 var server_host = process.env.YOUR_HOST || '0.0.0.0';
-server.listen(server_port, server_host, function() {
+app.listen(server_port, server_host, function() {
     console.log('Listening on port %d', server_port);
 });
 
@@ -135,8 +114,8 @@ app.use(logger("dev"));
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Make public a static folder
-app.use(express.static("public"));
+// Make current directory a static folder
+app.use(express.static("./"));
 
 // Database configuration
 var noteDatabaseUrl = "notetaker";
