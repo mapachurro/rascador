@@ -4,6 +4,7 @@ var mongojs = require("mongojs");
 // Require axios and cheerio. This makes the scraping possible
 var axios = require("axios");
 var cheerio = require("cheerio");
+var mongoose = require("mongoose");
 
 // Initialize Express
 var app = express();
@@ -23,6 +24,11 @@ var db = mongojs(databaseUrl, collections);
 db.on("error", function(error) {
   console.log("Database Error:", error);
 });
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(MONGODB_URI);
+
 
 // Main route (simple Hello World Message)
 app.get("/", function(req, res) {
