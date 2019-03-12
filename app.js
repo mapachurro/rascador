@@ -37,9 +37,8 @@ function getResultados() {
     for (var i = 0; i < data.length; i++) {
       console.log(data[i].note)
       // if (data[i].article === $("")) {
-        // parent.insertBefore(el, parent.firstChild);
         resultados.innerHTML = "<p class='data-entry' data-id=" + data[i]._id + ">" + data[i].note + "</span><span class='delete'>  _X_</span></p>"
-      $("#resultados").prepend("<p class='data-entry' data-id=" + data[i]._id + ">" + data[i].note + "</span><span class='delete'>  _X_</span></p>")
+      // $("#resultados").prepend("<p class='data-entry' data-id=" + data[i]._id + ">" + data[i].note + "</span><span class='delete'>  _X_</span></p>")
     // }
     };
 })};
@@ -100,7 +99,6 @@ $(document).on("click", ".delete", function() {
       selected.remove();
       // Clear the note and title inputs
       $("#note").val("");
-      $("#title").val("");
       // Make sure the #action-button is submit (in case it's update)
       $("#action-button").html("<button id='make-new'>Submit</button>");
     }
@@ -119,7 +117,6 @@ $(document).on("click", ".dataTitle", function() {
     success: function(data) {
       // Fill the inputs with the data that the ajax call collected
       $("#note").val(data.note);
-      $("#title").val(data.title);
       // Make the #action-button an update button, so user can
       // Update the note s/he chooses
       $("#action-button").html("<button id='updater' data-id='" + data._id + "'>Update</button>");
