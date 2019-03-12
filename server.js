@@ -121,6 +121,10 @@ app.use(express.static("./"));
 var noteDatabaseUrl = "notetaker";
 var noteCollections = ["notes"];
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(MONGODB_URI);
+
 // Hook mongojs config to db variable
 var dbnotes = mongojs(noteDatabaseUrl, noteCollections);
 

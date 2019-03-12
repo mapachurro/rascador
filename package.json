@@ -19,12 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mapachurro/rascadorElPais.git"
+    "url": "git+https://github.com/mapachurro/rascador.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mapachurro/rascadorElPais/issues"
+    "url": "https://github.com/mapachurro/rascador/issues"
   },
-  "homepage": "https://github.com/mapachurro/rascadorElPais#readme"
+  "homepage": "https://github.com/mapachurro/rascador#readme"
 }
